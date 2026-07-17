@@ -1,3 +1,5 @@
+import static java.lang.IO.*;
+
 void main() {
     println("""
         ===========================================
@@ -20,6 +22,7 @@ void main() {
         String inputNota = readln("Ingrese la nota final obtenida en '" + materiaPrerequisito + "' (0-10): ");
         nota = Double.parseDouble(inputNota);
     } else {
+        historial_materias = new String[]{""};    	
         println("-> Registrando como estudiante de Primer Semestre...");
     }
 
