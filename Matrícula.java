@@ -6,19 +6,19 @@ void main() {
         ===========================================
         """);
 
-    String usr = "";
-    String m1 = "Fundamentos de Programación";
-    double n1 = 0.0;
+    String nombreEstudiante = "";
+    String materiaPrerequisito = "Fundamentos de Programación";
+    double nota = 0.0;
     
-    usr = readln("Ingrese el nombre del estudiante: ");
-    String op = readln("¿Es estudiante de reingreso o arrastre? (S/N): ");
+    nombreEstudiante = readln("Ingrese el nombre del estudiante: ");
+    String reingreso = readln("¿Es estudiante de reingreso o arrastre? (S/N): ");
 
-    String[] h_materias = null; 
+    String[] historial_materias = null; 
 
-    if (op.equalsIgnoreCase("S")) {
-        h_materias = new String[]{ m1 };
-        String inputNota = readln("Ingrese la nota final obtenida en '" + m1 + "' (0-10): ");
-        n1 = Double.parseDouble(inputNota);
+    if (reingreso.equalsIgnoreCase("S")) {
+        historial_materias = new String[]{ materiaPrerequisito };
+        String inputNota = readln("Ingrese la nota final obtenida en '" + materiaPrerequisito + "' (0-10): ");
+        nota = Double.parseDouble(inputNota);
     } else {
         println("-> Registrando como estudiante de Primer Semestre...");
     }
@@ -28,20 +28,20 @@ void main() {
     String reqCupo = readln("¿Desea solicitar el cupo para esta materia? (S/N): ");
 
     if (reqCupo.equalsIgnoreCase("S")) {
-        boolean p1 = false;
+        boolean cumple_requisito = false;
 
-        for (int i = 0; i < h_materias.length; i++) {
-            if (h_materias[i].equals(m1)) {
-                p1 = true;
+        for (int i = 0; i < historial_materias.length; i++) {
+            if (historial_materias[i].equals(materiaPrerequisito)) {
+                cumple_requisito = true;
             }
         }
 
-        String resultadoMatricula = switch (String.valueOf(p1)) {
+        String resultadoMatricula = switch (String.valueOf(cumple_requisito)) {
             case "true" -> {
-                if (n1 >= 7.0) {
+                if (nota >= 7.0) {
                     yield "MATRÍCULA APROBADA: Cumple con el prerrequisito.";
                 } else {
-                    yield "MATRÍCULA RECHAZADA: Reprobó el prerrequisito con " + n1;
+                    yield "MATRÍCULA RECHAZADA: Reprobó el prerrequisito con " + nota;
                 }
             }
             case "false" -> "MATRÍCULA RECHAZADA: No cuenta con el prerrequisito en su historial.";
@@ -54,5 +54,3 @@ void main() {
         println("\nProceso finalizado. No se solicitaron materias de segundo nivel.");
     }
 }
-
-
