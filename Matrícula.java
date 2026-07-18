@@ -15,7 +15,7 @@ void main() {
     nombreEstudiante = readln("Ingrese el nombre del estudiante: ");
     String reingreso = readln("¿Es estudiante de reingreso o arrastre? (S/N): ");
 
-    String[] historial_materias = null; 
+    String[] historialMaterias = null; 
 
     if (reingreso.equalsIgnoreCase("S")) {
         historial_materias = new String[]{ materiaPrerequisito };
