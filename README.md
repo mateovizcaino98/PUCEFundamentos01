@@ -2,7 +2,7 @@ PUCE FUNDAMENTOS 01
 
 Problemas que resuelve la aplicacion 
     Este codigo es un sistema de gestion academica que esta diseñado para validar si un
-    esrtudiante cumple con los requisitos para poder mastricularse evaluando los datos que 
+    estudiante cumple con los requisitos para poder mastricularse evaluando los datos que 
     se le proporcionan. 
 
 Flujo de datos
@@ -29,9 +29,9 @@ Cambio en los nombre vagos de las variables
 
 Bug oculto
     Problema
-        El bug oculto dentro del codigo se encontraba en la linea 37 
-        for (int i = 0; i < historial_materias.length; i++)
-        lo que ocurria era que si un estudiante selecionaba "N" que significa no es de reingreso el arreglo historial_materias se inicializa como new String[]{""} (un arreglo con un elemento vacío). Aunque el programa no colapsa en el for, la lógica falla porque compara un String vacío con el prerrequisito, resultando siempre en false.
+        El error ocurria cuando el estudiante o usuario indicaba que era de primer semestre, de modo que el arreglo que que almacenaba el historial de materias 
+        nunca se iniciaba. Seguido de esto el programa intentaba recorrer ese arreglo para verificar el prerequisito, lo que provocaba una excepción y se detenia
+        la ejecución. 
 
     Solucion 
         Se implemento una logica que valida explícitamente el estado del estudiante antes de realizar la iteración o se ajustó la inicialización para evitar comparaciones inválidas.
