@@ -1,32 +1,40 @@
-# PUCEFundamentos01
-## 🚀 Taller Autónomo - Operación Código Legacy
+PUCE FUNDAMENTOS 01
 
-Bienvenidos a su primer reto de mantenimiento de software. En el mundo real, rara vez crearán sistemas desde cero; la mayor parte del tiempo heredarán código escrito por otras personas, a menudo sin documentación, con nombres confusos y errores ocultos.
+Problemas que resuelve la aplicacion 
+    Este codigo es un sistema de gestion academica que esta diseñado para validar si un
+    esrtudiante cumple con los requisitos para poder mastricularse evaluando los datos que 
+    se le proporcionan. 
 
-Hoy asumen el rol de **Analistas de Desarrollo**. El departamento de TI del PUCE TEC les ha entregado el módulo beta de validación de matrículas escrito en Java 25. El programador anterior fue reasignado y dejó el trabajo a medias.
+Flujo de datos
+    1.- El sistema pide y registra el nombre del estudiante, ademas de preguntar si es de reingreso. 
+    2.- Si es de reingreso se le solicitara su calificacion para el prerequisito. 
+        Si no lo es inica un historial vacio y omite la peticion de la nota. 
+    3.- El usuario indica si quiere matricularse para "estructura de datos"
+    4.- Se verifica si existe el prerequisito en el historial. 
+    5.- Se evalua la nota y se determina la aprobacion, rechazo. 
+    6.- El sistema imprime el estado de la maticula. 
 
-El sistema compila, pero tiene fallos estructurales graves. Su objetivo es entenderlo, arreglarlo y mejorarlo.
+Cambio en los nombre vagos de las variables
+    nombreEstudiante: Identificador del usuario.
 
----
+    materiaPrerrequisito: Nombre del requisito académico.
 
-### Misión de la Semana (Trabajo en Grupos)
+    reingreso: Determina el flujo del programa.
 
-### Fase 1: Ingeniería Inversa
-* **Clonen** este repositorio y creen una rama (`branch`) con el nombre de su grupo.
-* **Lean** el código línea por línea. Usen herramientas de IA si lo necesitan, pero *solo para entender*, no para reescribir.
-* **Expliquen** en el archivo `README.md` de forma clara y objetiva qué problema resuelve esta aplicación y describan el flujo de datos.
+    nota: Nota numérica del alumno.
 
-### Fase 2: Refactorización y Debugging
-* **Nombres vagos:** El código está lleno de variables como `usr`, `m1`, `n1`, `p1`. Renómbrenlas usando las buenas prácticas de la industria para que el código sea legible.
-* **El Bug Oculto:** Si ejecutan el programa y registran a un estudiante nuevo (que no es de reingreso), el sistema colapsa abruptamente al evaluar la materia destino. Encuentren la línea exacta que causa la excepción, entiendan por qué ocurre lógicamente y apliquen la solución en el código.
+    cumple_requisito: Bandera booleana de validación.
 
-### Fase 3: Nueva Funcionalidad (Requerimiento del Cliente)
-Dirección Académica ha solicitado un cambio urgente en la regla de negocio:
+    Con ertos cambios se espera tener una lectura y correcion mas sencilla y practica del codigo. 
 
-> Si un estudiante aprueba el prerrequisito con una calificación perfecta de **10.0**, el sistema no solo debe aprobar la matrícula, sino imprimir el siguiente mensaje destacado: *"¡Felicidades! Ha sido seleccionado como Tutor de Programación del PUCE TEC para este semestre."*
+Bug oculto
+    Problema
+        El bug oculto dentro del codigo se encontraba en la linea 37 
+        for (int i = 0; i < historial_materias.length; i++)
+        lo que ocurria era que si un estudiante selecionaba "N" que significa no es de reingreso el arreglo historial_materias se inicializa como new String[]{""} (un arreglo con un elemento vacío). Aunque el programa no colapsa en el for, la lógica falla porque compara un String vacío con el prerrequisito, resultando siempre en false.
 
----
+    Solucion 
+        Se implemento una logica que valida explícitamente el estado del estudiante antes de realizar la iteración o se ajustó la inicialización para evitar comparaciones inválidas.
 
-### Entregables Finales
-* **Pull Request:** Suban sus cambios a GitHub y abran un *Pull Request* hacia el repositorio original. Se evaluará el historial de commits para validar el trabajo en equipo.
-* **Video de Defensa Técnica (Máximo 3 minutos):** Incluyan el enlace al video en la descripción de su Pull Request. En la grabación deben demostrar la aplicación funcionando sin errores en la terminal, explicar dónde estaba el error oculto y cómo lo solucionaron, y mostrar el código refactorizado con la nueva funcionalidad implementada.
+Nueva funcion 
+    Se añadio la funcion de felicitacion e caso de que el estudiante registre la nota mas alta posible, en el cual, ademas de aprobar la matricula se imprimira un mensaje de reconocimiento. 
